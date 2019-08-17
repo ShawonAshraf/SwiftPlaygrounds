@@ -7,14 +7,25 @@ class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
-
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
-        label.text = "Hello World!"
-        label.textColor = .black
         
-        view.addSubview(label)
+        
+        let image = getImageFromURL(from: "https://image.blockbusterbd.net/00416_main_image_04072019225805.png")
+        
+        let imageView = UIImageView(image: image)
+        
+        
+        view.addSubview(imageView)
         self.view = view
+    }
+    
+    func getImageFromURL(from url: String) -> UIImage {
+        print("Loading image from \(url)")
+        let imageURL = URL(string: url)!
+        let imageData = try! Data(contentsOf: imageURL)
+        let image = UIImage(data: imageData)!
+        print("Done Loading")
+        
+        return image
     }
 }
 // Present the view controller in the Live View window
