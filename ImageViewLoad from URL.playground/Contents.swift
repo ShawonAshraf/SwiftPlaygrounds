@@ -13,19 +13,21 @@ class MyViewController : UIViewController {
         
         let imageView = UIImageView(image: image)
         
-        
+
         view.addSubview(imageView)
         self.view = view
     }
     
-    func getImageFromURL(from url: String) -> UIImage {
-        print("Loading image from \(url)")
+    func getImageFromURL(from url: String) -> UIImage? {
         let imageURL = URL(string: url)!
-        let imageData = try! Data(contentsOf: imageURL)
-        let image = UIImage(data: imageData)!
-        print("Done Loading")
+        let imageData = try? Data(contentsOf: imageURL)
         
-        return image
+        if let data = imageData {
+            let image = UIImage(data: data)
+            return image
+        } else {
+            return nil
+        }
     }
 }
 // Present the view controller in the Live View window
